@@ -5,7 +5,6 @@ import (
 	"io"
 	"runtime"
 	"sync"
-	"syscall"
 
 	"gitlab.com/gomidi/midi"
 )
@@ -64,7 +63,6 @@ func (o *in) fireCmd() error {
 	o.Unlock()
 	go func(shouldStopListening <-chan bool, didStopListening chan<- bool, shouldKill <-chan bool, wasKilled chan<- bool) {
 		cmd := midiCatCmd(fmt.Sprintf("in --index=%v --name='%s'", o.number, o.name))
-		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
 		rd, wr := io.Pipe()
 		cmd.Stdout = wr
 		err := cmd.Start()

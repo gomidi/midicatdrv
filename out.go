@@ -5,7 +5,6 @@ import (
 	"io"
 	"os/exec"
 	"sync"
-	"syscall"
 
 	"gitlab.com/gomidi/midi"
 )
@@ -35,9 +34,6 @@ func (o *out) fireCmd() error {
 	o.rd, o.wr = io.Pipe()
 	o.cmd.Stdin = o.rd
 
-	// important! prevents that signals such as interrupt send to the main program gets passed
-	// to midicat (which would not allow us to shutdown properly, e.g. stop hanging notes)
-	o.cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
 	err := o.cmd.Start()
 	if err != nil {
 		return err
