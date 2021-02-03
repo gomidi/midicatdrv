@@ -62,7 +62,8 @@ func (o *in) fireCmd() error {
 	o.hasProc = true
 	o.Unlock()
 	go func(shouldStopListening <-chan bool, didStopListening chan<- bool, shouldKill <-chan bool, wasKilled chan<- bool) {
-		cmd := midiCatCmd(fmt.Sprintf("in --index=%v --name='%s'", o.number, o.name))
+		cmd := midiCatInCmd(o.number)
+		//cmd := midiCatCmd(fmt.Sprintf("in --index=%v --name='%s'", o.number, o.name))
 		rd, wr := io.Pipe()
 		cmd.Stdout = wr
 		err := cmd.Start()

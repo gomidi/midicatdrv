@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"time"
 
 	"gitlab.com/gomidi/midi"
 	_ "gitlab.com/gomidi/midi/reader"
-	_ "gitlab.com/gomidi/midi/writer"
+	"gitlab.com/gomidi/midi/writer"
 	driver "gitlab.com/gomidi/midicatdrv"
 	// when using portmidi, replace the line above with
 	// driver gitlab.com/gomidi/portmididrv
@@ -28,17 +28,36 @@ func main() {
 	// make sure to close all open ports at the end
 	defer drv.Close()
 
-	ins, err := drv.Ins()
-	must(err)
-
 	outs, err := drv.Outs()
 	must(err)
 
-	if len(os.Args) == 2 && os.Args[1] == "list" {
-		printInPorts(ins)
-		printOutPorts(outs)
-		return
-	}
+	printOutPorts(outs)
+	//fmt.Printf("%#v\n", outs)
+
+	/*
+		ins, err := drv.Ins()
+		must(err)
+
+		outs, err := drv.Outs()
+		must(err)
+
+		if len(os.Args) == 2 && os.Args[1] == "list" {
+			printInPorts(ins)
+			printOutPorts(outs)
+			return
+		}
+	*/
+
+	out := outs[1]
+	err = out.Open()
+	must(err)
+
+	wr := writer.New(outs[1])
+
+	writer.NoteOn(wr, 60, 120)
+	time.Sleep(time.Second)
+	writer.NoteOff(wr, 60)
+	time.Sleep(time.Second)
 
 	/*
 		in, out := ins[0], outs[0]

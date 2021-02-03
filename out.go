@@ -30,7 +30,10 @@ func (o *out) fireCmd() error {
 	if o.cmd != nil {
 		return fmt.Errorf("already running")
 	}
-	o.cmd = midiCatCmd(fmt.Sprintf("out --index=%v --name='%s'", o.number, o.name))
+	//o.cmd = midiCatCmd(fmt.Sprintf("out --index=%v --name=%q", o.number, o.name))
+
+	o.cmd = midiCatOutCmd(o.number)
+	//o.cmd = midiCatCmd(fmt.Sprintf("out --index=%v", o.number))
 	o.rd, o.wr = io.Pipe()
 	o.cmd.Stdin = o.rd
 
