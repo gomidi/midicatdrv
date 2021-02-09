@@ -26,9 +26,7 @@ to connect to MIDI ports just pipe the MIDI data from and to this binary.
 This driver connects to the `midicat` binary via Stdin and Stdout while providing the same unified https://gitlab.com/gomidi/midi.Driver interface as `rtmididrv` and `portmididrv`. But projects importing this `midicatdrv` will not required CGO
 (like that would be the case otherwise).
 
-Download midicat:
-- [Windows]()
-- [Linux]()
+Download the midicat binaries for Linux and Windows [here](https://github.com/gomidi/midicat/releases/download/v0.2.0/midicat-binaries.zip).
 
 or compile with (MacOSX)
 
