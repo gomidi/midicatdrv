@@ -6,18 +6,15 @@ If you are viewing this on Github, please note that the development is located a
 
 A driver for the unified MIDI driver interface https://gitlab.com/gomidi/midi.Driver .
 
-This driver is based on the slim midicat project (see https://github.com/gomidi/midicat for more information).
+This driver is based on the slim midicat project (see https://gitlab.com/gomidi/midicat for more information).
 
-
-For a driver based on rtmidi, see https://gitlab.com/gomidi/rtmididrv
-For a driver based on portmidi, see https://gitlab.com/gomidi/portmididrv
 
 ## Installation
 
 It is recommended to use Go >= 1.14
 
-This is driver uses the `midicat`binary that you can get at https://github.com/gomidi/midicat
-for Windows and Linux (it should be possible to compile it on your own for the Mac).
+This is driver uses the `midicat` binary that you can get [here](https://github.com/gomidi/midicat/releases/download/v0.3.3/midicat-binaries.zip)
+for Windows and Linux (it should be possible to compile it on your own, e.g. for the Mac).
 
 The `midicat` binary is based on the rtmidi project and connects MIDI ports to Stdin and Stdout.
 The idea is, to have just one binary that requires CGO (`midicat`) and for all the Go projects that need
@@ -26,15 +23,8 @@ to connect to MIDI ports just pipe the MIDI data from and to this binary.
 This driver connects to the `midicat` binary via Stdin and Stdout while providing the same unified https://gitlab.com/gomidi/midi.Driver interface as `rtmididrv` and `portmididrv`. But projects importing this `midicatdrv` will not required CGO
 (like that would be the case otherwise).
 
-Download the midicat binaries for Linux and Windows [here](https://github.com/gomidi/midicat/releases/download/v0.2.0/midicat-binaries.zip).
-
-or compile with (MacOSX)
-
-```
-go install github.com/gomidi/midicat
-```
-
-Then get the library
+First download or compile the `midicat` binary and place it in your `PATH`.
+Then get this driver library
 
 ```
 go get -u gitlab.com/gomidi/midicatdrv
@@ -59,8 +49,6 @@ import (
 	"gitlab.com/gomidi/midi/reader"
 	"gitlab.com/gomidi/midi/writer"
 	driver "gitlab.com/gomidi/midicatdrv"
-	// when using rtmidi, replace the line above with
-	// driver gitlab.com/gomidi/rtmididrv
 )
 
 func must(err error) {
