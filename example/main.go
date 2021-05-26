@@ -47,7 +47,12 @@ func main() {
 	wr := writer.New(out)
 
 	// listen for MIDI
-	rd := reader.New(nil)
+	rd := reader.New(
+		reader.NoLogger(),
+		reader.Each(func(_ *reader.Position, msg midi.Message) {
+			fmt.Printf("%s\n", msg)
+		}),
+	)
 	go rd.ListenTo(in)
 
 	{ // write MIDI to out that passes it to in on which we listen.
