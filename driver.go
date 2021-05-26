@@ -41,6 +41,8 @@ func (d *Driver) Close() (err error) {
 		}
 	}
 
+	d.opened = nil
+
 	d.Unlock()
 
 	if len(e) == 0 {

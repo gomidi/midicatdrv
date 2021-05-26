@@ -13,7 +13,7 @@ This driver is based on the slim midicat project (see https://gitlab.com/gomidi/
 
 It is recommended to use Go >= 1.14
 
-This is driver uses the `midicat` binary that you can get [here](https://github.com/gomidi/midicat/releases/download/v0.3.3/midicat-binaries.zip)
+This is driver uses the `midicat` binary that you can get [here](https://github.com/gomidi/midicat/releases/download/v0.3.6/midicat-binaries.zip)
 for Windows and Linux (it should be possible to compile it on your own, e.g. for the Mac).
 
 The `midicat` binary is based on the rtmidi project and connects MIDI ports to Stdin and Stdout.
@@ -24,6 +24,8 @@ This driver connects to the `midicat` binary via Stdin and Stdout while providin
 (like that would be the case otherwise).
 
 First download or compile the `midicat` binary and place it in your `PATH`.
+**midicat version >= 0.3.6 is required**.
+
 Then get this driver library
 
 ```
