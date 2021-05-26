@@ -27,6 +27,10 @@ func midiCatOutCmd(index int) *exec.Cmd {
 	return cmd
 }
 
+func midiCatVersionCmd() *exec.Cmd {
+	return exec.Command("midicat.exe", "--version")
+}
+
 func midiCatInCmd(index int) *exec.Cmd {
 	cmd := exec.Command("midicat.exe", "in", fmt.Sprintf("--index=%v", index))
 	cmd.SysProcAttr = &syscall.SysProcAttr{
